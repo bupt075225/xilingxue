@@ -1,0 +1,10 @@
+git clone root@192.168.30.3:/home/lc/git-respority/webService.git
+
+依赖的第三方库和框架：
+1.Jinja2     模板引擎
+2.uikit      前端CSS开发框架
+3.jquery     uikit依赖的JS库
+4.vue        前端MVVM框架,实现前后端分离
+5.CryptoJS   Google的加解密JS库
+6.watchdog   Python第三方库，监视后端文件更新
+7.pathtools  watchdog依赖的库
