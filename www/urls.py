@@ -175,7 +175,7 @@ def api_get_blog(blog_id):
     raise APIResourceNotFoundError('Blog')
 
 @api
-@post('api/blogs')
+@post('/api/blogs')
 def api_create_blog():
     '''
     创建日志API

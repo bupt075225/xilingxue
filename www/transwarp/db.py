@@ -4,7 +4,7 @@
 """
 数据库访问接口的python封装
 """
-import sqlite3
+#import sqlite3
 import functools
 import threading
 import logging
@@ -53,7 +53,7 @@ def _profiling(start, sql=''):
 #数据库引擎对象
 class _Engine(object):
     def __init__(self, connect):
-        self._connect = connect
+        self._connect = connect()
 
     def connect(self):
         return self._connect
@@ -73,7 +73,7 @@ def createEngine(user, password, database, host='127.0.0.1', port=3306, **kwargs
     #连接参数
     params = dict(user=user, password=password, database=database, host=host, port=port)
     #默认连接参数
-    defaults = dict(use_unicode=True, charset='utf-8', collation='utf8_general_ci', autocommit=False)
+    defaults = dict(use_unicode=True, charset='utf8', collation='utf8_general_ci', autocommit=False)
     for k, v in defaults.iteritems():
         params[k] = kwargs.pop(k, v)
     #通过函数参数更新连接参数
@@ -95,9 +95,6 @@ class _LasyConnection(object):
     def cursor(self):
         if self.connection is None:
             connection = engine.connect()
-            print 'debug here>>>>>>>>>>>>>>'
-            print type(connection)
-            print connection
             #connection = sqlite3.connect("test.db")
             logging.info("open connection <%s>..." % hex(id(connection)))
             self.connection = connection
@@ -244,15 +241,14 @@ def _select(sql, first, *args):
     """
     global _db_ctx
     cursor = None
-    #sql = sql.replace('?', "%s")
-    args_tuple = tuple(args)
-    logging.info('SQL: %s, ARGS: %s' % (sql, args_tuple))
+    sql = sql.replace('?', "%s")
+    logging.info('SQL: %s, ARGS: %s' % (sql, args))
 
     try:
         #通过数据库上下文获取查询游标`cursor`
         cursor = _db_ctx.connection.cursor()
         #执行sql查询
-        cursor.execute(sql, args_tuple)
+        cursor.execute(sql, args)
         #处理查询结果，返回对象列表
         if cursor.description:
             names = [x[0] for x in cursor.description]
@@ -271,7 +267,7 @@ def _select(sql, first, *args):
 def _update(sql, *args):
     global _db_ctx
     cursor = None
-    #sql = sql.replace('?', '%s')
+    sql = sql.replace('?', '%s')
     logging.info('SQL: %s, ARGS: %s' % (sql, args))
     try:
         cursor = _db_ctx.connection.cursor()

@@ -45,7 +45,7 @@ $(function() {
         $('#div-loading').hide();
         initVM(results);
     }); 
-}
+});
 </script>
 
 {% endblock %}
@@ -90,8 +90,8 @@ $(function() {
                         <span v-text="blog.created_at.toDateTime()"></span>
                     </td>
                     <td>
-                        <a href="#0" v-on:click="edit_blog(blog)"><i class="uk-icon-edit"></i></a>
-                        <a href="#0" v-on:click="delete_blog(blog)"><i class="uk-icon-trash-o"></i></a>
+                        <a href="#0" v-on="click: edit_blog(blog)"><i class="uk-icon-edit"></i></a>
+                        <a href="#0" v-on="click: delete_blog(blog)"><i class="uk-icon-trash-o"></i></a>
                     </td>
                 </tr>
             </tbody>
@@ -99,10 +99,10 @@ $(function() {
         <div class="uk-width-1-1 uk-text-center">
             <ul class="uk-pagination">
                 <li v-if="! page.has_previous" class="uk-disabled"><span><i class="uk-icon-angle-double-left"></i></span></li>
-                <li v-if="page.has_previous"><a v-on:click="previous()" href="#0"><i class="uk-icon-angle-double-left"></i></a></li>
+                <li v-if="page.has_previous"><a v-on="click: previous()" href="#0"><i class="uk-icon-angle-double-left"></i></a></li>
                 <li class="uk-active"><span v-text="page.page_index"></span></li>
                 <li v-if="! page.has_next" class="uk-disabled"><span><i class="uk-icon-angle-double-right"></i></span></li>
-                <li v-if="page.has_next"><a v-on:click="next()" href="#0"><i class="uk-icon-angle-double-left"></i></a></li>
+                <li v-if="page.has_next"><a v-on="click: next()" href="#0"><i class="uk-icon-angle-double-left"></i></a></li>
             </ul>
         </div>
     </div>
