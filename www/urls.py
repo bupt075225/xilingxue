@@ -333,7 +333,9 @@ def api_get_users():
     '''
     获取用户API
     '''
-    users = User.find_by('order by created_at desc')
+    total = User.count_all()
+    page = Page(total, _get_page_index())
+    users = User.find_by('order by created_at desc limit ?,?', page.offset, page.limit)
     for u in users:
         u.password = '******'
-    return dict(users=users)
+    return dict(users=users, page=page)
