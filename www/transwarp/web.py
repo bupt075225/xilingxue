@@ -469,6 +469,8 @@ def _build_regex(path):
                     s = s + ch
                 elif ch>='A' and ch<='Z':
                     s = s + ch
+                elif ch>='a' and ch<='z':
+                    s = s + ch
                 else:
                     s = s + '\\' + ch
             re_list.append(s)

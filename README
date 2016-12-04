@@ -8,3 +8,4 @@ git clone root@192.168.30.3:/home/lc/git-respority/webService.git
 5.CryptoJS   Google的加解密JS库
 6.watchdog   Python第三方库，监视后端文件更新
 7.pathtools  watchdog依赖的库
+8.markdown2  Python第三方库实现markdown

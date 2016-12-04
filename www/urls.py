@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os, re, logging, time, base64, hashlib
+import markdown2
 from transwarp.web import get, post, ctx, view, interceptor, seeother, notfound
 from apis import api, Page, APIError, APIValueError, APIPermissionError, APIResourceNotFoundError
 from models import User, Blog, Comment
@@ -85,6 +86,16 @@ def index():
     '''
     blogs, page = _get_blogs_by_page()
     return dict(page=page, blogs=blogs, user=ctx.request.user)
+
+@view('blog.html')
+@get('/blog/:blog_id')
+def blog(blog_id):
+    blog = Blog.get(blog_id)
+    if blog is None:
+        raise notfound()
+    blog.html_content = markdown2.markdown(blog.content)
+    comments = Comment.find_by('where blog_id=? order by created_at desc limit 1000', blog_id)
+    return dict(blog=blog, comments=comments, user=ctx.request.user)
 
 @view('signin.html')
 @get('/signin')
@@ -241,16 +252,13 @@ def api_create_blog_comment(blog_id):
     '''
     创建评论
     '''
-    user = ctx.request.user
-    if user is None:
-        raise APIPermissionError('Need signin.')
     blog = Blog.get(blog_id)
     if blog is None:
         raise APIResourceNotFoundError('Blog')
     content = ctx.request.input(content='').content.strip()
     if not content:
         raise APIValueError('content')
-    c = Comment(blog_id=blog_id, user_id=user_id, user_name=user.name, user_image=user.image, content=content)
+    c = Comment(blog_id=blog_id, user_id=1, user_name='匿名', user_image='', content=content)
     c.insert()
     return dict(comment=c)
 

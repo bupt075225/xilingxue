@@ -231,7 +231,7 @@ class Model(dict):
         """
         条件查询，返回一个列表包含所有查询结果
         """
-        L = db.select('select * from `%s` `%s`' % (cls.__table__, where), *args)
+        L = db.select('select * from `%s` %s' % (cls.__table__, where), *args)
         return [cls(**d) for d in L]
 
     @classmethod
@@ -259,7 +259,7 @@ class Model(dict):
                 args.append(arg)
         pk = self.__primary_key__.name
         args.append(getattr(self, pk))
-        db.update('update `%s` set % where %s=?' % (self.__table__, ','.join(L), pk), *args)
+        db.update('update `%s` set %s where %s=?' % (self.__table__, ','.join(L), pk), *args)
         return self
 
     def delete(self):
