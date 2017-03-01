@@ -16,6 +16,17 @@
     <script src="/static/js/vue.js"></script>
     <script src="/static/js/awesome.js"></script>
     {% block beforehead %}<!-- before head -->{% endblock %}
+    
+    <!-- 百度统计 -->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+          var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?f4044722af5a1bf58fb28b275258bd38";
+              var s = document.getElementsByTagName("script")[0]; 
+                s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
 </head>
 <body>
     <!-- 页面头部导航 -->

@@ -46,3 +46,5 @@ wsgi.add_module(urls)
 if __name__ == '__main__':
     # 启动Web服务
 	wsgi.run(8080, '10.104.128.190')
+else:
+    application = wsgi.get_wsgi_application()
