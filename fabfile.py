@@ -9,12 +9,12 @@ import os,re
 from datetime import datetime
 from fabric.api import *
 
-env.user = 'admin'
+env.user = 'root'
 env.sudo_user = 'root'
-env.hosts = ['10.104.128.190']
+env.hosts = ['100.114.18.19']
 
 db_user = 'root'
-db_password = 'Passwd1#'
+db_password = '123456'
 
 _TAR_FILE = 'dist-xilingxue.tar.gz'
 _REMOTE_TMP_TAR = '/tmp/%s' % _TAR_FILE
