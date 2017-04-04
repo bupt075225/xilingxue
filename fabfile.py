@@ -11,10 +11,7 @@ from fabric.api import *
 
 env.user = 'root'
 env.sudo_user = 'root'
-env.hosts = ['100.114.18.19']
-
-db_user = 'root'
-db_password = '123456'
+env.hosts = ['100.14.18.19']
 
 _TAR_FILE = 'dist-xilingxue.tar.gz'
 _REMOTE_TMP_TAR = '/tmp/%s' % _TAR_FILE
