@@ -279,8 +279,6 @@ class Model(dict):
                 params[v.name] = getattr(self, k)
         db.insert('%s' % self.__table__, **params)
         return self
-        db.insert(self.__table__, **params)
-        return self
 
 if __name__=='__main__':
     logging.basicConfig(level=logging.DEBUG)
