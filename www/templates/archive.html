@@ -1,0 +1,15 @@
+{% extends '__base__.html' %}
+
+{% block title %}文章列表{% endblock %}
+
+{% block content %}
+    <div class="uk-width-medium-3-4">
+        <h2>文章列表</h2>
+    {% for blog in blogs %}
+        <div>
+        {{ blog.created_at|datetime }}
+        <a href="/blog/{{ blog.id }}">{{ blog.name }}</a>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

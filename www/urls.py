@@ -121,6 +121,23 @@ def register():
     '''
     return dict()
 
+@view('about.html')
+@get('/about')
+def about():
+    '''
+    西岭雪介绍页面
+    '''
+    return dict()
+
+@view('archive.html')
+@get('/archive')
+def archive():
+    '''
+    文章列表页面
+    '''
+    blogs = Blog.find_colums('id,name,created_at')
+    return dict(blogs=blogs, user=ctx.request.user)
+
 ###################### 管理页面 #########################################
 
 @get('/manage/')

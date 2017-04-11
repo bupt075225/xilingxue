@@ -235,6 +235,14 @@ class Model(dict):
         return [cls(**d) for d in L]
 
     @classmethod
+    def find_colums(cls, colums):
+        """
+        查询指定列
+        """
+        L = db.select('select %s from `%s`' % (colums, cls.__table__))
+        return [cls(**d) for d in L]
+
+    @classmethod
     def count_all(cls):
         return db.select_int('select count(`%s`) from `%s`' % (cls.__primary_key__.name, cls.__table__))
 
