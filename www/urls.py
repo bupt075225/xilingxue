@@ -52,7 +52,8 @@ def _get_blogs_by_page():
     total = Blog.count_all()
     page = Page(total, _get_page_index())
     print page
-    blogs = Blog.find_by('ORDER BY created_at DESC')
+    blogs = Blog.find_by('ORDER BY created_at DESC limit ?,?', 
+        page.offset, page.limit)
     return blogs, page
 
 @interceptor('/')
