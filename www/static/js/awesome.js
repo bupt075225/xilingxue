@@ -182,8 +182,3 @@ function showConfirm(title, text, fn_ok, fn_cancel) {
     modal.show();
 }
 
-$(function(){
-    if (location.pathname === '/' || location.pathname.indexOf('/blog')===0) {
-        $('li[data-url=blogs]').addClass('uk-active');    
-    }    
-});
